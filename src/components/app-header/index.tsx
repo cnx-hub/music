@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
+import { NavLink } from 'react-router-dom'
 
 import { headerLinks } from 'server/local-data'
 
@@ -11,11 +12,20 @@ import { IHeaderLinks } from 'types/local-data'
 
 export default memo(function HYAppHeader() {
   const showItem = (item: IHeaderLinks, index: number) => {
-    return (
-      <a href={item.link} target="_blank" rel="noopener noreferrer">
-        {item.title}
-      </a>
-    )
+    if (index < 3) {
+      return (
+        <NavLink to={item.link}>
+          {item.title}
+          <i className="sprite_01 icon"></i>
+        </NavLink>
+      )
+    } else {
+      return (
+        <a href={item.link} target="_blank" rel="noopener noreferrer">
+          {item.title}
+        </a>
+      )
+    }
   }
 
   return (
