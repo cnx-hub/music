@@ -1,11 +1,26 @@
 import React, { memo } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
+
+import { dicoverMenu } from 'server/local-data'
+
+import { DiscoverWrapper, TopMenu } from './styled'
 
 export default memo(function HYDiscover() {
   return (
-    <div>
-      HYDiscover
+    <DiscoverWrapper>
+      <div className="top">
+        <TopMenu className="wrap-v1">
+          {dicoverMenu.map((item) => {
+            return (
+              <div className="item" key={item.title}>
+                <NavLink to={item.link}>{item.title}</NavLink>
+              </div>
+            )
+          })}
+        </TopMenu>
+      </div>
+      {/* 嵌套路由 占位置 */}
       <Outlet />
-    </div>
+    </DiscoverWrapper>
   )
 })

@@ -1,4 +1,9 @@
-import { IHeaderLinks, IFooterLinks, IFooterImages } from 'types/local-data'
+import {
+  IHeaderLinks,
+  IFooterLinks,
+  IFooterImages,
+  IDicoverMenu
+} from 'types/local-data'
 
 export const headerLinks: IHeaderLinks[] = [
   {
@@ -62,5 +67,33 @@ export const footerImages: IFooterImages[] = [
   },
   {
     link: 'https://music.163.com/uservideo#/plan'
+  }
+]
+
+// discover中的数据
+export const dicoverMenu: IDicoverMenu[] = [
+  {
+    title: '推荐',
+    link: 'recommend'
+  },
+  {
+    title: '排行榜',
+    link: 'ranking'
+  },
+  {
+    title: '歌单',
+    link: 'songs'
+  },
+  {
+    title: '主播电台',
+    link: 'djradio'
+  },
+  {
+    title: '歌手',
+    link: 'artist'
+  },
+  {
+    title: '新碟上架',
+    link: 'album'
   }
 ]
