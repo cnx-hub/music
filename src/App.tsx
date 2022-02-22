@@ -1,11 +1,12 @@
 import React from 'react'
 import HYMain from 'pages/main'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <HYMain />
-    </div>
+    </BrowserRouter>
   )
 }
 
