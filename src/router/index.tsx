@@ -3,6 +3,9 @@ import { Navigate, RouteObject } from 'react-router-dom'
 
 const HYDiscover = React.lazy(() => import('pages/discover'))
 
+const HYFriend = React.lazy(() => import('pages/friend'))
+const HYMine = React.lazy(() => import('pages/mine'))
+
 const router: RouteObject[] = [
   {
     path: '/',
@@ -10,7 +13,21 @@ const router: RouteObject[] = [
   },
   {
     path: '/discover',
-    element: <HYDiscover />
+    element: <HYDiscover />,
+    children: [
+      {
+        element: <Navigate to={'artist'} />,
+        index: true
+      }
+    ]
+  },
+  {
+    path: '/friend',
+    element: <HYFriend />
+  },
+  {
+    path: '/mine',
+    element: <HYMine />
   }
 ]
 
