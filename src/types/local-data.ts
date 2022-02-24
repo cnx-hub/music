@@ -24,7 +24,7 @@ export interface IHotRadios {
   url: string
 }
 
-interface IArtists {
+export interface IArtists {
   name: string
   type: number
   url: string
