@@ -1,12 +1,17 @@
 import React from 'react'
 import HYMain from 'pages/main'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+
+import store from 'store'
 
 function App() {
   return (
-    <BrowserRouter>
-      <HYMain />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <HYMain />
+      </BrowserRouter>
+    </Provider>
   )
 }
 
