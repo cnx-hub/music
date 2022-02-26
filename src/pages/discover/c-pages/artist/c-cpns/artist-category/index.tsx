@@ -65,7 +65,7 @@ export default memo(function HYArtistCategory() {
 
   return (
     <CategoryWrapper>
-      {artistCategories.map((item, index) => {
+      {artistCategories.map((item) => {
         return (
           <div className="section" key={item.area}>
             <h2 className="title">{item.title}</h2>

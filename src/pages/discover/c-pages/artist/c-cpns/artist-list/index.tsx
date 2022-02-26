@@ -1,0 +1,29 @@
+import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
+import { fromJS } from 'immutable'
+
+import { ArtistListWrapper } from './style'
+import HYThemeHeaderNormal from 'components/theme-header-normal'
+import HYAlphaList from './c-cpns/alpha-list'
+
+import type { rootState } from 'store'
+import { IcurrentType } from '../../store/reducer'
+
+export default memo(function HYArtistList() {
+  // redux hooks
+  const { currentType } = useSelector<rootState, { currentType: IcurrentType }>(
+    (state) => ({
+      currentType: fromJS(state).getIn([
+        'artist',
+        'currentType'
+      ]) as IcurrentType
+    })
+  )
+
+  return (
+    <ArtistListWrapper>
+      <HYThemeHeaderNormal title={currentType.name} rightSlot={''} />
+      <HYAlphaList />
+    </ArtistListWrapper>
+  )
+})
