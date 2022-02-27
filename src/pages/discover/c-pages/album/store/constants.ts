@@ -1,0 +1,5 @@
+export enum IActionTypes {
+  CHANGE_HOT_ALBUMS = 'ablum/CHANGE_HOT_ALBUMS',
+  CHANGE_TOP_ALBUMS = 'album/CHANGE_TOP_ALBUMS',
+  CHANGE_TOP_TOTAL = 'album/CHANGE_TOP_TOTAL'
+}
