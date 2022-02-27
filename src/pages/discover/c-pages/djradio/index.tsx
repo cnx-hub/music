@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
 
+import { DjRadioWrapper } from './style'
+
 export default memo(function HYDjradio() {
-  return <div>HYDjradio</div>
+  return <DjRadioWrapper className="wrap-v2">HYDjradio</DjRadioWrapper>
 })
