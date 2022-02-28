@@ -16,7 +16,7 @@ const changeSongListAction = (res: any) => ({
 
 export const changeCurrentCategoryAction = (name: string) => ({
   type: IActionType.CHANGE_CURRENT_CATEGORY,
-  categorySongs: name
+  currentCategory: name
 })
 
 export const getCategory = () => {
