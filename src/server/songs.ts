@@ -6,13 +6,15 @@ export function getSongCategory() {
   })
 }
 
-export function getSongCategoryList(cat = '全部', offset = 0, limit = 35) {
+export function getSongCategoryList(cat: string, offset = 0, limit = 35) {
+  console.log(cat)
+
   return request.get<any>({
     url: '/top/playlist',
     params: {
       cat,
-      offset,
-      limit
+      limit,
+      offset
     }
   })
 }
