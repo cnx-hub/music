@@ -7,8 +7,6 @@ export function getSongCategory() {
 }
 
 export function getSongCategoryList(cat: string, offset = 0, limit = 35) {
-  console.log(cat)
-
   return request.get<any>({
     url: '/top/playlist',
     params: {
