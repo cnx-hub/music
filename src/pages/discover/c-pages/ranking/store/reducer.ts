@@ -23,5 +23,7 @@ export default function reducer(state = defaultState, action: IAction) {
       return state.set('playList', action.playList || {})
     case IActionType.CHANGE_TOP_LIST:
       return state.set('topList', action.topList || [])
+    default:
+      return state
   }
 }
