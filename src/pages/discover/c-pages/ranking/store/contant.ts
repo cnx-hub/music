@@ -1,0 +1,5 @@
+export enum IActionType {
+  CHANGE_TOP_LIST = 'ranking/CHANGE_TOP_LIST',
+  CHANGE_CURRENT_INDEX = 'rangking/CHANGE_CURRENT_INDEX',
+  CHANGE_PLAY_LIST = 'ranking/CHANGE_PLAY_LIST'
+}
