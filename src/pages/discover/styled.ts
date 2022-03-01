@@ -21,6 +21,7 @@ export const TopMenu = styled.div`
       padding: 0 13px;
       margin: 7px 17px 0;
       color: #fff;
+      font-size: 12px;
 
       &:hover,
       &.active {

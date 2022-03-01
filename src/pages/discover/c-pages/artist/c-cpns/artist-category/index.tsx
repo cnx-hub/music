@@ -49,6 +49,7 @@ export default memo(function HYArtistCategory() {
               className={classNames({ active: isSelect })}
             >
               <span
+                style={{ fontSize: '12px' }}
                 onClick={() =>
                   selectArtist(area, { name: artist.name, type: artist.type })
                 }

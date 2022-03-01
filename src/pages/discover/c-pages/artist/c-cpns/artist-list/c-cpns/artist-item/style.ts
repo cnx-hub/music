@@ -18,7 +18,7 @@ export const ItemWrapper = styled.div`
 
     .name {
       cursor: pointer;
-
+      font-size: 12px;
       &:hover {
         color: red;
         text-decoration: underline;
