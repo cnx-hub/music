@@ -13,10 +13,23 @@ const changeBannerAction = (res: any) => ({
   banners: res.banners
 })
 
+const changeRecommendAction = (res: any) => ({
+  type: IActionType.CHANGE_HOT_RECOMMEND,
+  recommends: res.result
+})
+
 export const getBanner = () => {
   return (dispatch: any) => {
     getTopBanner().then((res) => {
       dispatch(changeBannerAction(res))
+    })
+  }
+}
+
+export const getRecommend = () => {
+  return (dispatch: any) => {
+    getHotRecommend().then((res) => {
+      dispatch(changeRecommendAction(res))
     })
   }
 }
