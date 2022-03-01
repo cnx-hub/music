@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { HeaderWrapper } from './style'
 
 interface IProps {
-  title: string
-  keywords: any[]
+  title?: string
+  keywords?: any[]
   moreLink: string
-  keywordClick: (cat: string) => void
+  keywordClick?: (cat: string) => void
 }
 
 const HYThemeHeaderRCM = memo((props: React.PropsWithChildren<IProps>) => {
@@ -18,10 +18,13 @@ const HYThemeHeaderRCM = memo((props: React.PropsWithChildren<IProps>) => {
       <div className="left">
         <h3 className="title">{title}</h3>
         <div className="keyword">
-          {keywords.map((item) => {
+          {keywords?.map((item) => {
             return (
               <div className="item" key={item}>
-                <span className="link" onClick={(e) => keywordClick(item)}>
+                <span
+                  className="link"
+                  onClick={(e) => (keywordClick as any)(item)}
+                >
                   {item}
                 </span>
                 <span className="divider">|</span>

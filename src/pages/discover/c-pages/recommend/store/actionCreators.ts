@@ -18,6 +18,11 @@ const changeRecommendAction = (res: any) => ({
   recommends: res.result
 })
 
+const changeNewAlbumAction = (res: any) => ({
+  type: IActionType.CHANGE_NEW_ALBUM,
+  newAlbum: res.albums
+})
+
 export const getBanner = () => {
   return (dispatch: any) => {
     getTopBanner().then((res) => {
@@ -30,6 +35,14 @@ export const getRecommend = () => {
   return (dispatch: any) => {
     getHotRecommend().then((res) => {
       dispatch(changeRecommendAction(res))
+    })
+  }
+}
+
+export const getAlbum = () => {
+  return (dispatch: any) => {
+    getNewAlbum(10, 0).then((res) => {
+      dispatch(changeNewAlbumAction(res))
     })
   }
 }
