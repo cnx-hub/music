@@ -13,6 +13,7 @@ import HYRankingList from './c-cpns/ranking-list'
 
 import HYUserLogin from './c-cpns/user-login'
 import HYSettleSinger from './c-cpns/settle-singer'
+import HYHotRadio from './c-cpns/hot-radio'
 
 export default memo(function HYRecommend() {
   return (
@@ -27,6 +28,7 @@ export default memo(function HYRecommend() {
         <RecommendRight>
           <HYUserLogin />
           <HYSettleSinger />
+          <HYHotRadio />
         </RecommendRight>
       </Content>
     </RecommendWraper>
