@@ -34,6 +34,7 @@ export const AlbumWrapper = styled.div`
       }
 
       .page {
+        height: 100%;
         display: flex !important;
         justify-content: space-between;
         align-items: center;

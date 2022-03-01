@@ -5,6 +5,7 @@ export const AlbumWrapper = styled.div<{
   size: string
   bgp: string
 }>`
+  height: 100%;
   .album-image {
     position: relative;
     width: ${(props) => props.width};
@@ -40,6 +41,9 @@ export const AlbumWrapper = styled.div<{
 
     .artist {
       color: #666;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 `
