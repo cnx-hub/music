@@ -6,7 +6,12 @@ import {
   RecommendLeft,
   RecommendRight
 } from './style'
+import HYTopBanner from './c-cpns/top-banner'
 
 export default memo(function HYRecommend() {
-  return <RecommendWraper>HYRecommend</RecommendWraper>
+  return (
+    <RecommendWraper>
+      <HYTopBanner />
+    </RecommendWraper>
+  )
 })
