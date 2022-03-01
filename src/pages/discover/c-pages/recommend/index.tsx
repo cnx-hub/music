@@ -9,6 +9,7 @@ import {
 import HYTopBanner from './c-cpns/top-banner'
 import HYHotRecommend from './c-cpns/hot-recommend'
 import HYNewAlbum from './c-cpns/new-album'
+import HYRankingList from './c-cpns/ranking-list'
 
 export default memo(function HYRecommend() {
   return (
@@ -18,6 +19,7 @@ export default memo(function HYRecommend() {
         <RecommendLeft>
           <HYHotRecommend />
           <HYNewAlbum />
+          <HYRankingList />
         </RecommendLeft>
         <RecommendRight></RecommendRight>
       </Content>

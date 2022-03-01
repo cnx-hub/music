@@ -20,7 +20,9 @@ export default memo(function HYDiscover() {
         </TopMenu>
       </div>
       {/* 嵌套路由 占位置 */}
-      <Outlet />
+      <div style={{ backgroundColor: '#f5f5f5' }}>
+        <Outlet />
+      </div>
     </DiscoverWrapper>
   )
 })

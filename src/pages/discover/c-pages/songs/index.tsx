@@ -20,7 +20,7 @@ export default memo(function HYSongs() {
 
   useEffect(() => {
     dispatch(changeCurrentCategoryAction((cat.state as any).cat))
-  }, [cat])
+  }, [cat, dispatch])
 
   // hooks
   useEffect(() => {

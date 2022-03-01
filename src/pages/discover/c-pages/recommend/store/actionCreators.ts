@@ -23,6 +23,21 @@ const changeNewAlbumAction = (res: any) => ({
   newAlbum: res.albums
 })
 
+const changeUpListAction = (res: any) => ({
+  type: IActionType.CHANGE_UP_LIST,
+  topUpList: res.playlist
+})
+
+const changeNewListAction = (res: any) => ({
+  type: IActionType.CHANGE_NEW_LIST,
+  topNewList: res.playlist
+})
+
+const changeOriginListAction = (res: any) => ({
+  type: IActionType.CHANGE_ORIGIN_LIST,
+  topOriginList: res.playlist
+})
+
 export const getBanner = () => {
   return (dispatch: any) => {
     getTopBanner().then((res) => {
@@ -43,6 +58,26 @@ export const getAlbum = () => {
   return (dispatch: any) => {
     getNewAlbum(10, 0).then((res) => {
       dispatch(changeNewAlbumAction(res))
+    })
+  }
+}
+
+export const getTopData = (idx: number) => {
+  return (dispatch: any) => {
+    getTopList(idx).then((res) => {
+      switch (idx) {
+        case 0:
+          dispatch(changeNewListAction(res))
+          break
+        case 2:
+          dispatch(changeOriginListAction(res))
+          break
+        case 3:
+          dispatch(changeUpListAction(res))
+          break
+        default:
+          console.log('其他数据处理')
+      }
     })
   }
 }
