@@ -1,5 +1,12 @@
 import React, { memo } from 'react'
 
+import {
+  RecommendWraper,
+  Content,
+  RecommendLeft,
+  RecommendRight
+} from './style'
+
 export default memo(function HYRecommend() {
-  return <div>HYRecommend</div>
+  return <RecommendWraper>HYRecommend</RecommendWraper>
 })
