@@ -38,6 +38,11 @@ const changeOriginListAction = (res: any) => ({
   topOriginList: res.playlist
 })
 
+const changeSettleSingsAction = (res: any) => ({
+  type: IActionType.CHANGE_SETTLE_SONGER,
+  settleSings: res.artists
+})
+
 export const getBanner = () => {
   return (dispatch: any) => {
     getTopBanner().then((res) => {
@@ -78,6 +83,14 @@ export const getTopData = (idx: number) => {
         default:
           console.log('其他数据处理')
       }
+    })
+  }
+}
+
+export const getSettleSingers = () => {
+  return (dispatch: any) => {
+    getArtistList(5, 5001).then((res) => {
+      dispatch(changeSettleSingsAction(res))
     })
   }
 }

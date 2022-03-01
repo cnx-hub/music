@@ -31,7 +31,7 @@ export function getTopList(idx: number) {
   })
 }
 
-export function getArtistList(limit: number, cat: string) {
+export function getArtistList(limit: number, cat: number) {
   return request.get<any>({
     url: '/artist/list',
     params: {
