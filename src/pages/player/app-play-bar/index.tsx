@@ -13,6 +13,7 @@ import { formatMinuteSecond, getPlayUrl } from 'utils/format-utils'
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style'
 import { Slider, message } from 'antd'
+import { Message } from 'components/message'
 
 import type { rootState } from 'store'
 import { useEffect } from 'react'
@@ -129,8 +130,7 @@ export default memo(function HYAppPlaybar() {
     const finalIndex = i - 1
     if (finalIndex !== currentLyricIndex) {
       dispatch(changeCurrentLyricIndexAction(finalIndex))
-      message.open({
-        type: 'info',
+      Message.open({
         content: currentLyrics[finalIndex].content,
         key: 'lyric',
         duration: 0,
