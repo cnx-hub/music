@@ -8,6 +8,7 @@ import ErrorBoundary, {
 import { FullPageLoading } from 'components/loading'
 import HYAppHeader from 'components/app-header'
 import HYAppFooter from 'components/app-footer'
+import HYAppPlayBar from 'pages/player/app-play-bar'
 
 import router from 'router'
 
@@ -21,6 +22,7 @@ export default memo(function HYMain() {
         {element}
       </Suspense>
       <HYAppFooter />
+      <HYAppPlayBar />
     </ErrorBoundary>
   )
 })
