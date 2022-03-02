@@ -8,32 +8,33 @@ import {
   getSimiSong
 } from 'server/player'
 import { parseLyric } from 'utils/lrc-parse'
-
+// 改变当前歌曲的index
 const changeCurrentSongIndexAction = (index: number) => ({
   type: IActionType.CHANGE_CURRENT_SONG_INDEX,
   songIndex: index
 })
-
+// 改变当前歌曲
 const changeCurrentSongAction = (song: any) => ({
   type: IActionType.CHANGE_CURRENT_SONG,
   song
 })
-
+// 改变歌词
 const changeLyricsAction = (lyrics: any) => ({
   type: IActionType.CHANGE_LYRICS,
   lyrics
 })
-
+// 改变歌曲列表
 const changePlayListAction = (playList: any) => ({
   type: IActionType.CHANGE_PLAY_LIST,
   playList: playList
 })
-
+// 改变歌词的index
 export const changeCurrentLyricIndexAction = (index: number) => ({
   type: IActionType.CHANGE_CURRENT_LYRIC_INDEX,
   lyricIndex: index
 })
 
+// 加载歌曲
 export const getSongDetailAction = (ids: number) => {
   return (dispatch: any, getState: any) => {
     // 1.判断是否歌曲存在playList中
@@ -68,7 +69,7 @@ export const getSongDetailAction = (ids: number) => {
     })
   }
 }
-
+// 改变歌曲的播放模式
 export const changePlaySequenceAction = (currentSequence: number) => {
   if (currentSequence === 3) currentSequence = 0
   return {
@@ -76,7 +77,7 @@ export const changePlaySequenceAction = (currentSequence: number) => {
     sequence: currentSequence
   }
 }
-
+// 切换歌曲
 export const changePlaySongAction = (tag: number) => {
   return (dispatch: any, getState: any) => {
     // 1.获取当前的index

@@ -12,7 +12,7 @@ import {
 import { formatMinuteSecond, getPlayUrl } from 'utils/format-utils'
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style'
-import { Slider, message } from 'antd'
+import { Slider } from 'antd'
 import { Message } from 'components/message'
 
 import type { rootState } from 'store'
@@ -138,7 +138,6 @@ export default memo(function HYAppPlaybar() {
       })
     }
   }
-
   const timeEnded = () => {
     if (playSequence === 2 || playList.length === 1) {
       ;(audioRef.current as HTMLAudioElement).currentTime = 0
