@@ -14,6 +14,10 @@ export function getCount(count: number) {
   }
 }
 
+export function getPlayUrl(id: number) {
+  return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+}
+
 export function formatDate(time: number, fmt: string) {
   let date = new Date(time)
 

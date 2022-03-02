@@ -1,18 +1,21 @@
-import React, { memo, useState, useCallback } from 'react'
+import React, { memo, useState, useCallback, useRef } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { fromJS } from 'immutable'
 import { NavLink } from 'react-router-dom'
 
 import {
   changePlaySongAction,
-  changePlaySequenceAction
+  changePlaySequenceAction,
+  changeCurrentLyricIndexAction,
+  getSongDetailAction
 } from '../store/actionCreators'
-import { formatMinuteSecond } from 'utils/format-utils'
+import { formatMinuteSecond, getPlayUrl } from 'utils/format-utils'
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style'
-import { Slider } from 'antd'
+import { Slider, message } from 'antd'
 
 import type { rootState } from 'store'
+import { useEffect } from 'react'
 
 export default memo(function HYAppPlaybar() {
   // state
@@ -22,7 +25,6 @@ export default memo(function HYAppPlaybar() {
   const [currentTime, setCurrentTime] = useState(0)
   const [isChanging, setIsChanging] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
-  // redux
   // redux hooks
   const {
     currentSong,
@@ -54,9 +56,34 @@ export default memo(function HYAppPlaybar() {
   )
   const dispatch = useDispatch()
 
+  // hooks
+  // 默认加载的歌曲
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  useEffect(() => {
+    dispatch(getSongDetailAction(167876))
+  }, [dispatch])
+  // 初始化音频
+  useEffect(() => {
+    ;(audioRef.current as HTMLAudioElement).src = getPlayUrl(currentSong.id)
+    audioRef.current
+      ?.play()
+      .then((res) => {
+        setIsPlaying(true)
+      })
+      .catch((err) => {
+        setIsPlaying(false)
+      })
+    setDuration(currentSong.dt)
+  }, [currentSong])
+
   // 其他业务
   const play = useCallback(() => {
     setIsPlaying(!isPlaying)
+    isPlaying
+      ? audioRef.current?.pause()
+      : audioRef.current?.play().catch((err) => {
+          setIsPlaying(false)
+        })
   }, [isPlaying])
 
   // 滚动条
@@ -69,12 +96,58 @@ export default memo(function HYAppPlaybar() {
     },
     [duration]
   )
+  const sliderAfterChange = useCallback(
+    (value) => {
+      const time = ((value / 100.0) * duration) / 1000
+      ;(audioRef.current as HTMLAudioElement).currentTime = time
+      setCurrentTime(time)
+      setIsChanging(false)
 
-  const sliderAfterChange = useCallback((value) => {
-    const time = ((value / 100.0) * duration) / 1000
-    setCurrentTime(time)
-    setIsChanging(false)
-  }, [])
+      if (!isPlaying) {
+        play()
+      }
+    },
+    [duration, isPlaying, play]
+  )
+  //音频播放
+  const timeUpdate = (e: any) => {
+    const currentTime = e.target.currentTime
+
+    if (!isChanging) {
+      setCurrentTime(currentTime)
+      setProgress(((currentTime * 1000) / duration) * 100)
+    }
+
+    const lrcLength = currentLyrics.length
+    let i = 0
+    for (; i < lrcLength; i++) {
+      const lrcTime = currentLyrics[i].time
+      if (currentTime * 1000 < lrcTime) {
+        break
+      }
+    }
+    const finalIndex = i - 1
+    if (finalIndex !== currentLyricIndex) {
+      dispatch(changeCurrentLyricIndexAction(finalIndex))
+      message.open({
+        type: 'info',
+        content: currentLyrics[finalIndex].content,
+        key: 'lyric',
+        duration: 0,
+        className: 'lyric-message'
+      })
+    }
+  }
+
+  const timeEnded = () => {
+    if (playSequence === 2 || playList.length === 1) {
+      ;(audioRef.current as HTMLAudioElement).currentTime = 0
+      audioRef.current?.play()
+    } else {
+      dispatch(changePlaySongAction(1))
+    }
+  }
+
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
@@ -83,7 +156,10 @@ export default memo(function HYAppPlaybar() {
             className="sprite_playbar btn prev"
             onClick={(e) => dispatch(changePlaySongAction(-1))}
           ></button>
-          <button className="sprite_playbar btn play"></button>
+          <button
+            className="sprite_playbar btn play"
+            onClick={(e) => play()}
+          ></button>
           <button
             className="sprite_playbar btn next"
             onClick={(e) => dispatch(changePlaySongAction(1))}
@@ -104,7 +180,11 @@ export default memo(function HYAppPlaybar() {
               <span className="singer-name">{currentSong.ar[0].name}</span>
             </div>
             <div className="progress">
-              <Slider value={progress} onChange={sliderChange} />
+              <Slider
+                value={progress}
+                onChange={sliderChange}
+                onAfterChange={sliderAfterChange}
+              />
               <div className="time">
                 <span className="now-time">
                   {formatMinuteSecond(currentTime * 1000)}
@@ -139,6 +219,11 @@ export default memo(function HYAppPlaybar() {
           </div>
         </Operator>
       </div>
+      <audio
+        ref={audioRef}
+        onTimeUpdate={timeUpdate}
+        onEnded={timeEnded}
+      ></audio>
     </PlaybarWrapper>
   )
 })
