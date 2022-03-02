@@ -23,6 +23,14 @@ const changeLyricsAction = (lyrics: any) => ({
   lyrics
 })
 
+export const changePlaySequenceAction = (currentSequence: number) => {
+  if (currentSequence === 3) currentSequence = 0
+  return {
+    type: IActionType.CHANGE_PLAY_SEQUENCE,
+    sequence: currentSequence
+  }
+}
+
 export const changePlaySongAction = (tag: number) => {
   return (dispatch: any, getState: any) => {
     // 1.获取当前的index
