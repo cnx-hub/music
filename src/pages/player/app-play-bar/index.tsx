@@ -14,6 +14,7 @@ import { formatMinuteSecond, getPlayUrl } from 'utils/format-utils'
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style'
 import { Slider } from 'antd'
 import { Message } from 'components/message'
+import HYAppPlayPanel from '../app-play-panel'
 
 import type { rootState } from 'store'
 import { useEffect } from 'react'
@@ -130,12 +131,14 @@ export default memo(function HYAppPlaybar() {
     const finalIndex = i - 1
     if (finalIndex !== currentLyricIndex) {
       dispatch(changeCurrentLyricIndexAction(finalIndex))
-      Message.open({
-        content: currentLyrics[finalIndex].content,
-        key: 'lyric',
-        duration: 0,
-        className: 'lyric-message'
-      })
+      if (!showPanel) {
+        Message.open({
+          content: currentLyrics[finalIndex].content,
+          key: 'lyric',
+          duration: 1,
+          className: 'lyric-message'
+        })
+      }
     }
   }
   const timeEnded = () => {
@@ -223,6 +226,7 @@ export default memo(function HYAppPlaybar() {
         onTimeUpdate={timeUpdate}
         onEnded={timeEnded}
       ></audio>
+      {showPanel && <HYAppPlayPanel />}
     </PlaybarWrapper>
   )
 })
