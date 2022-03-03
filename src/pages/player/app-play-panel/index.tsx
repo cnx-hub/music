@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import { PanelWrapper } from './style'
 import HYPlayHeader from './c-cpns/play-header'
 
-export default function HYAppPlayPanel() {
+export default memo(function HYAppPlayPanel() {
   return (
     <PanelWrapper>
       <HYPlayHeader />
@@ -16,4 +16,4 @@ export default function HYAppPlayPanel() {
       </div>
     </PanelWrapper>
   )
-}
+})
