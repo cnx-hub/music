@@ -34,6 +34,16 @@ export const changeCurrentLyricIndexAction = (index: number) => ({
   lyricIndex: index
 })
 
+const changeSimiPlaylistAction = (res: any) => ({
+  type: IActionType.CHANGE_SIMI_PLAYLIST,
+  simiPlaylist: res.playlists
+})
+
+const changeSimiSongsAction = (res: any) => ({
+  type: IActionType.CHANGE_SIMI_SONGS,
+  simiSongs: res.songs
+})
+
 // 加载歌曲
 export const getSongDetailAction = (ids: number) => {
   return (dispatch: any, getState: any) => {
@@ -106,6 +116,28 @@ export const changePlaySongAction = (tag: number) => {
       const lrcString = res.lrc.lyric
       const lyrics = parseLyric(lrcString)
       dispatch(changeLyricsAction(lyrics))
+    })
+  }
+}
+
+export const getSimiPlaylistAction = () => {
+  return (dispatch: any, getState: any) => {
+    const id = getState().getIn(['player', 'currentSong']).id
+    if (!id) return
+
+    getSimiPlaylist(id).then((res) => {
+      dispatch(changeSimiPlaylistAction(res))
+    })
+  }
+}
+
+export const getSimiSongAction = () => {
+  return (dispatch: any, getState: any) => {
+    const id = getState().getIn(['player', 'currentSong']).id
+    if (!id) return
+
+    getSimiSong(id).then((res) => {
+      dispatch(changeSimiSongsAction(res))
     })
   }
 }

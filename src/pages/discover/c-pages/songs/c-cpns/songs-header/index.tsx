@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { fromJS } from 'immutable'
 
 import { HeaderWrapper, HeaderLeft, HeaderRight } from './style'
